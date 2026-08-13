@@ -1,532 +1,253 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Yuchao Wang的个人主页：动作生成、视频动捕、动作修复与角色动画研究。">
+    <meta name="theme-color" content="#f4f4ef">
+    <meta property="og:title" content="Yuchao Wang | Motion Generation">
+    <meta property="og:description" content="Research in motion generation, video motion capture, motion repair, and character animation tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="headshot.jpg">
     <title>Yuchao Wang | Motion Generation</title>
-    <meta
-      name="description"
-      content="Personal homepage for motion generation, video motion capture, motion repair, and character animation research."
-    >
-    <style>
-      :root {
-        --bg: #ffffff;
-        --ink: #1f2328;
-        --muted: #59636e;
-        --line: #d8dee4;
-        --soft: #f6f8fa;
-        --accent: #1f6feb;
-        --accent-dark: #0a4fba;
-        --paper: #ffffff;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        line-height: 1.58;
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      img,
-      video {
-        display: block;
-        max-width: 100%;
-      }
-
-      .page {
-        width: min(1080px, calc(100% - 32px));
-        margin: 0 auto;
-      }
-
-      .top-nav {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        border-bottom: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(12px);
-      }
-
-      .nav-inner {
-        width: min(1080px, calc(100% - 32px));
-        min-height: 54px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-      }
-
-      .brand {
-        color: var(--ink);
-        font-weight: 700;
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        font-size: 14px;
-      }
-
-      .section {
-        padding: 34px 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .section:last-of-type {
-        border-bottom: 0;
-      }
-
-      .profile {
-        display: grid;
-        grid-template-columns: 245px minmax(0, 1fr);
-        gap: 34px;
-        padding-top: 38px;
-      }
-
-      .portrait {
-        width: 210px;
-        aspect-ratio: 1 / 1;
-        border-radius: 4px;
-        object-fit: cover;
-        border: 1px solid var(--line);
-        background: var(--soft);
-      }
-
-      .contact-card {
-        margin-top: 16px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .contact-card p {
-        margin: 7px 0;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      p {
-        margin-top: 0;
-      }
-
-      h1 {
-        margin-bottom: 4px;
-        font-size: 36px;
-        line-height: 1.15;
-      }
-
-      .name-en {
-        margin-bottom: 14px;
-        color: var(--muted);
-        font-size: 18px;
-      }
-
-      .role {
-        margin-bottom: 18px;
-        color: #30363d;
-        font-size: 17px;
-      }
-
-      .bio {
-        margin-bottom: 18px;
-      }
-
-      .link-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
-        margin-bottom: 22px;
-      }
-
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        min-height: 31px;
-        border: 1px solid var(--line);
-        border-radius: 4px;
-        padding: 4px 9px;
-        background: var(--soft);
-        color: #24292f;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .interest-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .interest-list li {
-        border: 1px solid #c9d8f0;
-        border-radius: 4px;
-        padding: 4px 8px;
-        background: #f1f6ff;
-        color: #173d72;
-        font-size: 14px;
-      }
-
-      h2 {
-        margin-bottom: 18px;
-        font-size: 25px;
-        line-height: 1.25;
-      }
-
-      .news-list {
-        margin: 0;
-        padding-left: 20px;
-      }
-
-      .news-list li + li {
-        margin-top: 6px;
-      }
-
-      .news-date {
-        color: var(--muted);
-        font-weight: 700;
-      }
-
-      .two-col {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
-      }
-
-      .timeline-title {
-        margin-bottom: 14px;
-        font-size: 19px;
-      }
-
-      .timeline-item {
-        padding: 0 0 17px 18px;
-        border-left: 2px solid var(--line);
-      }
-
-      .timeline-item:last-child {
-        padding-bottom: 0;
-      }
-
-      .timeline-time {
-        color: var(--muted);
-        font-size: 14px;
-        font-weight: 700;
-      }
-
-      .timeline-item h4 {
-        margin: 2px 0 4px;
-        font-size: 16px;
-      }
-
-      .timeline-item p {
-        margin-bottom: 0;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .publication {
-        display: grid;
-        grid-template-columns: 230px minmax(0, 1fr);
-        gap: 20px;
-        padding: 18px 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .publication:first-of-type {
-        border-top: 0;
-        padding-top: 0;
-      }
-
-      .thumb {
-        position: relative;
-        overflow: hidden;
-        aspect-ratio: 16 / 9;
-        border: 1px solid var(--line);
-        border-radius: 4px;
-        background: #111;
-      }
-
-      .thumb img,
-      .thumb video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .pub-title {
-        margin-bottom: 5px;
-        color: var(--accent-dark);
-        font-size: 18px;
-        line-height: 1.35;
-      }
-
-      .authors {
-        margin-bottom: 4px;
-        color: #30363d;
-        font-size: 14px;
-      }
-
-      .venue {
-        margin-bottom: 8px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .desc {
-        margin-bottom: 9px;
-        color: #30363d;
-        font-size: 14px;
-      }
-
-      .paper-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .paper-links a {
-        border-radius: 4px;
-        padding: 3px 8px;
-        background: var(--soft);
-        color: var(--accent-dark);
-        font-size: 13px;
-        font-weight: 700;
-      }
-
-      .project-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .project-card {
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: 4px;
-        background: var(--paper);
-      }
-
-      .project-body {
-        padding: 12px;
-      }
-
-      .project-body h3 {
-        margin-bottom: 5px;
-        font-size: 16px;
-        line-height: 1.35;
-      }
-
-      .project-body p {
-        margin-bottom: 9px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .footer {
-        padding: 26px 0 34px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      @media (max-width: 850px) {
-        .nav-inner {
-          align-items: flex-start;
-          flex-direction: column;
-          padding: 12px 0;
-          gap: 8px;
-        }
-
-        .nav-links {
-          width: 100%;
-          overflow-x: auto;
-          padding-bottom: 2px;
-        }
-
-        .profile,
-        .two-col,
-        .publication,
-        .project-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .profile {
-          padding-top: 28px;
-        }
-
-        .portrait {
-          width: 180px;
-        }
-      }
-    </style>
+    <link rel="icon" href="headshot.jpg">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <header class="top-nav">
-      <nav class="nav-inner" aria-label="主导航">
-        <a class="brand" href="#">Yuchao Wang</a>
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#news">News</a>
-          <a href="#experience">Experience</a>
-          <a href="#publications">Publications</a>
-          <a href="#projects">Projects</a>
-        </div>
+    <a class="skip-link" href="#main">跳到正文</a>
+
+    <header class="site-header" id="top">
+      <a class="wordmark" href="#top" aria-label="Yuchao Wang主页">
+        <span class="wordmark-mark">YW</span>
+        <span class="wordmark-name">Yuchao Wang</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-tools">
+        <button class="icon-button theme-toggle" type="button" aria-label="切换深色模式" title="切换主题">☾</button>
+        <button class="icon-button menu-toggle" type="button" aria-label="打开菜单" title="菜单" aria-expanded="false">☰</button>
+      </div>
+
+      <nav class="mobile-nav" aria-label="移动端导航" hidden>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
       </nav>
     </header>
 
-    <main class="page">
-      <section id="about" class="section profile">
-        <aside>
-          <img class="portrait" src="headshot.jpg" alt="Yuchao Wang头像">
-          <div class="contact-card">
-            <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/wychah">github.com/wychah</a></p>
-            <p><strong>Scholar:</strong> <a href="#">Google Scholar</a></p>
-            <p><strong>CV:</strong> <a href="#">cv.pdf</a></p>
-          </div>
-        </aside>
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <video class="hero-video" autoplay muted loop playsinline poster="headshot.jpg">
+          <source src="motion_generation/1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-scrim" aria-hidden="true"></div>
 
-        <div>
-          <h1>Yuchao Wang</h1>
-          <p class="name-en">Yichen Wang</p>
-          <p class="role">Researcher / Engineer in Motion Generation, Video Motion Capture, and Character Animation</p>
-          <p class="bio">
-            我主要研究人体动作生成、视频动捕、动作修复与角色动画生产管线。我的工作关注如何从视频、文本、关键帧或带噪动捕数据中恢复自然、稳定、可编辑的三维人体动作，并将模型结果接入 BVH/FBX、MotionBuilder、Blender 和游戏引擎工作流。
-          </p>
-          <p class="bio">
-            当前主页内容为样例占位。你可以把这里替换成自己的研究简介、导师/团队信息、求职状态、合作方向或代表性成果。
-          </p>
-          <div class="link-row" aria-label="快捷链接">
-            <a class="chip" href="#publications">Publications</a>
-            <a class="chip" href="#projects">Project Demos</a>
-            <a class="chip" href="#">Code</a>
-            <a class="chip" href="#">CV</a>
+        <div class="hero-inner section-shell">
+          <div class="hero-content">
+            <p class="hero-kicker">Motion Generation · Video Mocap · Motion Repair</p>
+            <h1 id="hero-title">Yuchao Wang</h1>
+            <div class="hero-identity">
+              <img src="headshot.jpg" alt="Yuchao Wang头像">
+              <div>
+                <p>Researcher / Engineer working on human motion generation, video-based motion capture, and animation production tools.</p>
+                <span>替换为你的城市 / 学校 / 公司</span>
+              </div>
+            </div>
+            <div class="hero-links" aria-label="个人链接">
+              <a href="https://github.com/wychah" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="#" target="_blank" rel="noreferrer">Google Scholar</a>
+              <a href="#" target="_blank" rel="noreferrer">CV</a>
+              <a href="mailto:your.email@example.com">Email</a>
+            </div>
           </div>
-          <ul class="interest-list" aria-label="研究兴趣">
-            <li>Human Motion Generation</li>
-            <li>Video-based Mocap</li>
-            <li>Motion Repair</li>
-            <li>Motion Retargeting</li>
-            <li>Animation Tools</li>
-          </ul>
+
+          <div class="hero-status">
+            <div>
+              <span>Current focus</span>
+              <strong>Human Motion Generation</strong>
+              <small>text / video / keyframe / noisy mocap to 3D motion</small>
+            </div>
+            <div>
+              <span>Pipeline</span>
+              <strong>BVH / FBX / MotionBuilder</strong>
+              <small>repair, retargeting, evaluation, and visualization</small>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="news" class="section">
-        <h2>News</h2>
-        <ul class="news-list">
-          <li><span class="news-date">2026.08</span> 主页上线，后续将补充真实论文、项目视频和代码链接。</li>
-          <li><span class="news-date">2026.07</span> 示例：一个动作修复项目完成 MotionBuilder/FBX 导出流程。</li>
-          <li><span class="news-date">2026.05</span> 示例：一个可控人体动作生成 demo 更新了更多动作类别。</li>
-        </ul>
+      <section class="about section-shell" id="about" aria-labelledby="about-title">
+        <div class="section-label"><span>01</span><p>About</p></div>
+        <div class="about-intro">
+          <h2 id="about-title">我关注可生成、可修复、可落地的人体动作技术。</h2>
+          <p>
+            我的研究和工程工作围绕人体动作生成、视频动捕、动作修复和角色动画管线展开。目标是把视频、文本、关键帧或噪声动捕数据转化为自然、稳定、可编辑的 3D 动作，并支持导出到动画制作和游戏引擎流程。
+          </p>
+          <div class="research-tags" aria-label="研究兴趣">
+            <span>Human Motion Generation</span>
+            <span>Video-based Motion Capture</span>
+            <span>Motion Repair</span>
+            <span>Motion Retargeting</span>
+            <span>Animation Tools</span>
+          </div>
+        </div>
       </section>
 
-      <section id="experience" class="section">
-        <h2>Experience & Education</h2>
-        <div class="two-col">
+      <section class="facts section-shell" id="experience" aria-labelledby="experience-title">
+        <div class="section-head compact-head">
+          <div class="section-label"><span>02</span><p>Experience</p></div>
           <div>
-            <h3 class="timeline-title">Work Experience</h3>
-            <article class="timeline-item">
-              <div class="timeline-time">2025.07 - Present</div>
+            <h2 id="experience-title">工作与学习经历</h2>
+            <p>这里保留样例文字，后续替换为你的真实单位、学校、导师、项目职责和时间。</p>
+          </div>
+        </div>
+
+        <div class="profile-facts">
+          <article class="fact-column">
+            <div class="fact-heading"><h3>Work Experience</h3></div>
+            <div class="fact-item fact-primary">
+              <time>2025 - Present</time>
               <h4>Motion AI Engineer · 示例公司 / 实验室</h4>
               <p>负责视频动捕、动作修复模型和角色动画工具链，包括 BVH/FBX 数据处理、模型推理、MotionBuilder 自动化和结果评估。</p>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-time">2024.03 - 2025.06</div>
+            </div>
+            <div class="fact-item compact">
+              <time>2024 - 2025</time>
               <h4>Research Intern · 示例研究团队</h4>
               <p>参与可控人体动作生成项目，搭建数据清洗、动作片段检索、生成结果可视化和用户评测流程。</p>
-            </article>
-          </div>
+            </div>
+          </article>
 
-          <div>
-            <h3 class="timeline-title">Education</h3>
-            <article class="timeline-item">
-              <div class="timeline-time">2022.09 - 2025.06</div>
+          <article class="fact-column">
+            <div class="fact-heading"><h3>Education</h3></div>
+            <div class="fact-item fact-primary">
+              <time>2022 - 2025</time>
               <h4>M.S. in Computer Science · 示例大学</h4>
               <p>研究方向为人体动作生成与三维人体运动理解。可在这里填写导师、实验室和毕业论文题目。</p>
-            </article>
-            <article class="timeline-item">
-              <div class="timeline-time">2018.09 - 2022.06</div>
+            </div>
+            <div class="fact-item compact">
+              <time>2018 - 2022</time>
               <h4>B.S. in Software Engineering · 示例大学</h4>
-              <p>学习图形学、计算机视觉、机器学习和动画制作相关课程，并完成角色动画和动捕数据处理项目。</p>
-            </article>
-          </div>
+              <p>学习图形学、计算机视觉、机器学习和动画制作相关课程，完成角色动画和动捕数据处理项目。</p>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section id="publications" class="section">
-        <h2>Selected Publications</h2>
-
-        <article class="publication">
-          <div class="thumb">
-            <video src="motion_generation/1.mp4" preload="metadata" muted loop playsinline controls></video>
-          </div>
-          <div>
-            <h3 class="pub-title">Editable Human Motion Generation from Sparse Controls</h3>
-            <p class="authors"><strong>Yichen Wang</strong>, Collaborator A, Collaborator B</p>
-            <p class="venue">Conference 2026 · 替换为真实会议 / 期刊</p>
-            <p class="desc">样例论文：提出一种面向角色动画制作的可控动作生成方法，支持从稀疏控制信号生成自然、连续且便于后期编辑的人体动作。</p>
-            <div class="paper-links">
-              <a href="#">Paper</a>
-              <a href="#">Code</a>
-              <a href="#">Project Page</a>
-              <a href="#">BibTeX</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="publication">
-          <div class="thumb">
-            <video src="motion_recover/修复模型对比s.mp4" preload="metadata" muted loop playsinline controls></video>
-          </div>
-          <div>
-            <h3 class="pub-title">Robust Motion Repair for Noisy Mocap Sequences</h3>
-            <p class="authors"><strong>Yichen Wang</strong>, Collaborator A, Collaborator B</p>
-            <p class="venue">Journal 2025 · 替换为真实期刊 / 会议</p>
-            <p class="desc">样例论文：针对视频动捕和光学动捕中的抖动、缺失、脚滑等问题，设计动作修复模型以提升运动稳定性和动画可用性。</p>
-            <div class="paper-links">
-              <a href="#">Paper</a>
-              <a href="#">Video</a>
-              <a href="#">Code</a>
-              <a href="#">BibTeX</a>
-            </div>
-          </div>
-        </article>
+      <section class="news-section section-shell" aria-labelledby="news-title">
+        <div class="section-head compact-head">
+          <div class="section-label"><span>News</span></div>
+          <div><h2 id="news-title">Recent News</h2></div>
+        </div>
+        <ol class="news-grid">
+          <li><time>2026.08</time><span>主页上线，后续将补充真实论文、项目视频、代码链接和 CV。</span></li>
+          <li><time>2026.07</time><span>示例：动作修复项目完成 MotionBuilder/FBX 导出流程。</span></li>
+          <li><time>2026.05</time><span>示例：可控人体动作生成 demo 更新了更多动作类别。</span></li>
+        </ol>
       </section>
 
-      <section id="projects" class="section">
-        <h2>Projects & Demos</h2>
+      <section class="publications section-shell" id="publications" aria-labelledby="publications-title">
+        <div class="section-head publications-head">
+          <div class="section-label"><span>03</span><p>Research</p></div>
+          <div>
+            <h2 id="publications-title">Selected Publications</h2>
+            <div class="filter-tabs" role="group" aria-label="筛选论文">
+              <button class="filter-button active" type="button" data-filter="all">All</button>
+              <button class="filter-button" type="button" data-filter="generation">Generation</button>
+              <button class="filter-button" type="button" data-filter="capture">Capture</button>
+              <button class="filter-button" type="button" data-filter="repair">Repair</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="publication-list">
+          <article class="paper-item" data-category="generation">
+            <div class="paper-media">
+              <div class="media-toolbar" role="tablist" aria-label="动作生成论文媒体">
+                <button class="media-tab active" type="button" data-media-target="figure" aria-selected="true">Figure</button>
+                <button class="media-tab" type="button" data-media-target="demo" aria-selected="false">Demo</button>
+              </div>
+              <div class="media-stage">
+                <div class="media-panel active placeholder-figure" data-media-panel="figure">
+                  <span>上传 teaser 图后替换这里</span>
+                </div>
+                <div class="media-panel" data-media-panel="demo" hidden>
+                  <video controls muted loop playsinline preload="none" poster="headshot.jpg" data-src="motion_generation/1.mp4"></video>
+                </div>
+              </div>
+            </div>
+            <div class="paper-content">
+              <div class="paper-meta"><span class="venue venue-blue">Conference 2026</span><span>First author</span></div>
+              <h3>Editable Human Motion Generation from Sparse Controls</h3>
+              <p class="paper-authors"><strong>Yichen Wang</strong>, Collaborator A, Collaborator B</p>
+              <p class="paper-summary">样例论文：提出一种面向角色动画制作的可控动作生成方法，支持从稀疏控制信号生成自然、连续且便于后期编辑的人体动作。</p>
+              <div class="paper-links">
+                <a href="#">Paper</a>
+                <a href="#">Code</a>
+                <a href="#">Project Page</a>
+                <a href="#">BibTeX</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper-item" data-category="repair capture">
+            <div class="paper-media">
+              <div class="media-toolbar" role="tablist" aria-label="动作修复论文媒体">
+                <button class="media-tab active" type="button" data-media-target="figure" aria-selected="true">Figure</button>
+                <button class="media-tab" type="button" data-media-target="demo" aria-selected="false">Demo</button>
+              </div>
+              <div class="media-stage">
+                <div class="media-panel active" data-media-panel="figure">
+                  <video muted loop playsinline preload="metadata" src="motion_recover/修复模型对比s.mp4"></video>
+                </div>
+                <div class="media-panel" data-media-panel="demo" hidden>
+                  <video controls muted loop playsinline preload="none" data-src="motion_recover/修复模型对比s.mp4"></video>
+                </div>
+              </div>
+            </div>
+            <div class="paper-content">
+              <div class="paper-meta"><span class="venue venue-coral">Journal 2025</span><span>First author</span></div>
+              <h3>Robust Motion Repair for Noisy Mocap Sequences</h3>
+              <p class="paper-authors"><strong>Yichen Wang</strong>, Collaborator A, Collaborator B</p>
+              <p class="paper-summary">样例论文：针对视频动捕和光学动捕中的抖动、缺失、脚滑等问题，设计动作修复模型以提升运动稳定性和动画可用性。</p>
+              <div class="paper-links">
+                <a href="#">Paper</a>
+                <a href="#">Video</a>
+                <a href="#">Code</a>
+                <a href="#">BibTeX</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="projects section-shell" id="projects" aria-labelledby="projects-title">
+        <div class="section-head compact-head">
+          <div class="section-label"><span>04</span><p>Demos</p></div>
+          <div>
+            <h2 id="projects-title">Projects & Demos</h2>
+            <p>项目卡片可以直接复制新增。可以使用视频第一帧作为封面，也可以把 `poster` 改成你上传的封面图。</p>
+          </div>
+        </div>
+
         <div class="project-grid">
           <article class="project-card">
-            <div class="thumb">
-              <video src="motion_generation/2.mp4" preload="metadata" muted loop playsinline controls></video>
+            <div class="project-media">
+              <video controls muted loop playsinline preload="metadata" src="motion_generation/2.mp4"></video>
             </div>
             <div class="project-body">
-              <h3>Motion Generation Demo</h3>
-              <p>从文本、关键帧或轨迹控制生成动作序列。这里可以填写输入形式、模型结构、训练数据和可视化方式。</p>
+              <span>Motion Generation</span>
+              <h3>文本 / 控制信号驱动的人体动作生成</h3>
+              <p>展示从文本、关键帧或轨迹控制生成动作序列的效果。这里可以补充输入形式、模型结构、训练数据和可视化方式。</p>
               <div class="paper-links">
                 <a href="#">Demo</a>
                 <a href="#">GitHub</a>
@@ -535,11 +256,12 @@
           </article>
 
           <article class="project-card">
-            <div class="thumb">
-              <video src="motion_recover/修复模型对比s.mp4" preload="metadata" muted loop playsinline controls></video>
+            <div class="project-media">
+              <video controls muted loop playsinline preload="metadata" src="motion_recover/修复模型对比s.mp4"></video>
             </div>
             <div class="project-body">
-              <h3>Motion Repair Pipeline</h3>
+              <span>Motion Repair</span>
+              <h3>动捕结果修复与稳定化</h3>
               <p>对噪声动作进行平滑、补全和接触修复，减少抖动、穿插和脚滑，使输出更适合动画生产管线。</p>
               <div class="paper-links">
                 <a href="#">Video</a>
@@ -549,11 +271,12 @@
           </article>
 
           <article class="project-card">
-            <div class="thumb">
-              <video src="motion_generation/1.mp4" preload="metadata" muted loop playsinline controls></video>
+            <div class="project-media">
+              <video controls muted loop playsinline preload="metadata" src="motion_generation/1.mp4"></video>
             </div>
             <div class="project-body">
-              <h3>Video Mocap to FBX</h3>
+              <span>Video Mocap</span>
+              <h3>视频驱动的角色动作捕捉流程</h3>
               <p>从单目或多目视频估计人体姿态，经过时序优化和重定向后导出 BVH/FBX，用于角色动画编辑。</p>
               <div class="paper-links">
                 <a href="#">Pipeline</a>
@@ -563,10 +286,21 @@
           </article>
         </div>
       </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-inner section-shell">
+          <div class="section-label"><span>05</span><p>Contact</p></div>
+          <div class="contact-copy">
+            <h2 id="contact-title">欢迎交流动作生成、视频动捕和动画工具链。</h2>
+            <p>请把这里替换为你的邮箱、合作说明或求职状态。</p>
+          </div>
+          <a class="contact-email" href="mailto:your.email@example.com">your.email@example.com</a>
+        </div>
+      </section>
     </main>
 
-    <footer class="page footer">
-      © 2026 Yichen Wang. Last updated: August 2026.
+    <footer class="site-footer">
+      <div class="section-shell">© 2026 Yichen Wang. Last updated: August 2026.</div>
     </footer>
   </body>
 </html>
