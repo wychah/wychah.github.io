@@ -6,8 +6,8 @@ const mobileNav = document.querySelector(".mobile-nav");
 
 function setTheme(theme) {
   root.dataset.theme = theme;
-  themeButton.textContent = theme === "dark" ? "☀" : "☾";
-  themeButton.setAttribute("aria-label", theme === "dark" ? "切换浅色模式" : "切换深色模式");
+  themeButton.textContent = theme === "dark" ? "Light" : "Dark";
+  themeButton.setAttribute("aria-label", theme === "dark" ? "Use light theme" : "Use dark theme");
   const themeMeta = document.querySelector('meta[name="theme-color"]');
   if (themeMeta) themeMeta.setAttribute("content", theme === "dark" ? "#101310" : "#f4f4ef");
   localStorage.setItem("theme", theme);
@@ -16,7 +16,7 @@ function setTheme(theme) {
 function closeMenu() {
   mobileNav.hidden = true;
   menuButton.setAttribute("aria-expanded", "false");
-  menuButton.textContent = "☰";
+  menuButton.textContent = "Menu";
   header.classList.remove("menu-active");
   document.body.classList.remove("menu-open");
 }
@@ -25,7 +25,7 @@ function toggleMenu() {
   const willOpen = mobileNav.hidden;
   mobileNav.hidden = !willOpen;
   menuButton.setAttribute("aria-expanded", String(willOpen));
-  menuButton.textContent = willOpen ? "×" : "☰";
+  menuButton.textContent = willOpen ? "Close" : "Menu";
   header.classList.toggle("menu-active", willOpen);
   document.body.classList.toggle("menu-open", willOpen);
 }
